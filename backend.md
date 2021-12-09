@@ -25,6 +25,6 @@ Por favor, não esquecer de adicionar no README as instruções de como executar
 ## Como entregar?
 
 Não faça um fork desse projeto, crie um repositório no seu perfil do GitHub. Pode criar privado mesmo, sem problemas.
-Assim que terminar é só compartilhar o código com nosso usuário [devdigitalrepublic](https://github.com/devdigitalrepublic) e entrar em contato com a gente.
+Assim que terminar é só compartilhar o código com nosso usuário [devdigitalrepublic](https://github.com/devdigitalrepublic) e envie o link para rh@digitalrepublic.com.br
 
 Boa sorte e divirta-se! ;)
