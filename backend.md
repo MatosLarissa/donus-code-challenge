@@ -17,10 +17,17 @@ Por favor, não esquecer de adicionar no README as instruções de como executar
 ## O que avaliamos?
 
 - Performance
+Os algoritmos foram elabordos pensando na melhor performance do sistema?
 - Testes
-- Manutenabilidade
+Testes unitários são importantes, faça a maior cobertura possível do seu código.
+- Segurança
+Verifique se não deixou informações sensíveis no repositório, como senhas de banco ou scripts com dados de usuário. Verifique se os métodos do sistema possuem validação que impeça chamadas não autorizadas a inserir ou modificar dados.
+- Manutenabilidade:
+O projeto foi estruturado de forma componentizada, facilitando o reuso de código, manutenção e entendimento do mesmo? As variáveis comuns ao projeto estão centralizadas em um arquivo de configuraçao?
 - Princípios de programação
-- Arquitetura de Software
+Foi capaz de utilizar principios fundamentais da programação (laços, condicionais, tipos de dados, etc)?
+- Arquitetura de Software:
+Seu software segue padrões de separação de camadas por responsabilidade? Os métodos estão coesos e com baixo acoplamento?
 
 ## Como entregar?
 
