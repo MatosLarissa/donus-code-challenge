@@ -46,7 +46,7 @@ export default class Payable {
     setPaymentDate(paymentDate: string) {
         this.paymentDate = paymentDate
     }
-    setCreatedDate(createdDate: string) {
+    setCreatedDate(createdDate: Date) {
         this.createdDate = createdDate
     }
     setValue(value: number) {
