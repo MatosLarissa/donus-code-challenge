@@ -23,4 +23,28 @@ export default class CardDataBase extends BaseDataBase implements CardRepository
             throw new Error(error.message || error.sqlMessage)
         }
     }
+
+    getAllTransactionByCustomerId = async (idCustomer: string) => {
+        try {
+            const queryResult: any = await CardDataBase
+                .connection(this.TABLE_CARD)
+                .select()
+                .where({ idCustomer })
+            if (queryResult[0]) {
+                const result = new Card(
+                    queryResult[0].id,
+                    queryResult[0].cardCustomerName,
+                    queryResult[0].cardNumber,
+                    queryResult[0].lastNumber,
+                    queryResult[0].cvv,
+                    queryResult[0].idCustomer
+                )
+                return result
+            } else {
+                return null
+            }
+        } catch (error: any) {
+            throw new Error(error.message || error.sqlMessage)
+        }
+    }
 }
