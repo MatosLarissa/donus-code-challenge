@@ -2,6 +2,7 @@ import AuthenticatorInterface from "../../model/authenticator/authenticatorInter
 
 import Customer from "../../model/customer/customer";
 import signInInputDto from "../../model/customer/customerDto/signInInputDto";
+import signUpInputDto from "../../model/customer/customerDto/signUpInputDto";
 import HashManagerUtils from "../../utils/hashManagerUtils";
 import IdGeneratorUtils from "../../utils/idGeneratorUtils";
 import TokenGeneratorUtils from "../../utils/tokenGeneratorUtils";
@@ -86,6 +87,37 @@ class CustomerBusiness {
         return token
     }
 
+    login = async (input: signUpInputDto) => {
+        const { email, password } = input
+
+        if (!email || !password) {
+            throw new Error("Verifique se 'email', 'password' estão preenchidos.")
+        }
+
+        if (this.validateEmailUtils.validateEmail(email) === false) {
+            throw new Error("Email invalido.")
+        }
+
+        if (this.validatePasswordUtils.validatePassword(password) === false) {
+            throw new Error("Senha invalido, precisa no mínimo 4 caracteres, pelo menos 1 letra e 1 número.")
+        }
+
+        const customer = await this.customerData.getCustomerByEmail(email)
+        if (!customer) {
+            throw new Error("O email que você inseriu não está conectado a uma conta")
+        }
+
+
+        const verifyPassword = await this.hashManagerUtils.compare(password, customer.getPassword())
+        if (!verifyPassword) {
+            throw new Error("Senha inválida")
+        }
+
+        const token = this.tokenGeneratorUtils.generateToken({ id: customer.getId(), email: customer.getEmail() })
+
+        return token
+
+    }
 }
 
 export default CustomerBusiness;         
