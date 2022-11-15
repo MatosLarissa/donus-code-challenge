@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcryptjs';
 
-export class HashManagerUtils {
+export default class HashManagerUtils {
     hash = async (
         plainText: string
     ): Promise<string> => {
