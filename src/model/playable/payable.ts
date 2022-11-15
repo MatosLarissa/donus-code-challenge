@@ -5,7 +5,7 @@ export default class Payable {
         private id: string,
         private status: paymentStatus,
         private paymentDate: string,
-        private createdDate: string,
+        private createdDate: Date,
         private value: number,
         private description: string,
         private idCustomer: string
