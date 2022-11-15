@@ -1,5 +1,5 @@
 import { v4 } from "uuid";
 
-export default class IdGenerator {
+export default class IdGeneratorUtils {
     generateId = (): string => v4()
 }
