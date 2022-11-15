@@ -6,7 +6,7 @@ import CardInputDTO from "../../model/card/cardDto/cardInputDto";
 export default class CardController {
 
     private cardBusiness: CardBusiness
-    
+
     constructor() {
         this.cardBusiness = new CardBusiness(new CardDataBase)
     }
