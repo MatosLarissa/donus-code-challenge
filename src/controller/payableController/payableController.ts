@@ -34,4 +34,29 @@ export default class PayableController {
             res.status(400).send("Erro no signup")
         }
     }
+
+    getAllPayableByUser = async (req: Request, res: Response) => {
+        try {
+            const input: string | any = {
+                token: req.headers.authorization,
+                id: req.body.id
+            }
+            const token = await this.payableBusiness.getAllPayableByUser(input)
+
+            const result = [
+                token?.getDescription,
+                token?.getValue,
+                token?.getStatus,
+                token?.setPaymentDate,
+            ]
+
+            res.status(200).send({
+                result
+            })
+
+        } catch (error: any) {
+            if (error.message) return res.status(400).send(error.message)
+            res.status(400).send("Erro no signup")
+        }
+    }
 }
