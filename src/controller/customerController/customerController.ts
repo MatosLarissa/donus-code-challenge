@@ -34,5 +34,21 @@ export default class CustomerController {
             res.status(400).send("Erro ao criar o cadastrado")
         }
     }
-}
 
+    login = async (req: Request, res: Response) => {
+        const input: signUpInputDto = {
+            email: req.body.email,
+            password: req.body.password
+        }
+
+        try {
+            const token = await this.customerBusiness.login(input)
+
+            res.status(200).send({ Message: token })
+
+        } catch (error: any) {
+            if (error.message) return res.status(400).send(error.message)
+            res.status(400).send("Erro ao fazer login")
+        }
+    }
+}
