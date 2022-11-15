@@ -80,4 +80,19 @@ export default class PayableBusiness {
 
         return payable
     }
+
+    getAllPayableByUser = async (token: string | undefined) => {
+        if (!token) {
+            throw new Error("Token inexistente ou inválido.")
+        }
+
+        const verifyToken = this.tokenGeneratorUtils.getTokenData(token)
+        if (!verifyToken) {
+            throw new Error("Token inexistente ou inválido.")
+        }
+
+        const payable = await this.payableData.getAllPayableByCustomerId(verifyToken.id)
+
+        return payable
+    }
 }
