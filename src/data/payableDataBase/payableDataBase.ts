@@ -25,4 +25,29 @@ export default class PayableDataBase extends BaseDataBase implements PayableRepo
             throw new Error(error.message || error.sqlMessage)
         }
     }
+
+    getAllPayableByCustomerId = async (id: string) => {
+        try {
+            const queryResult: any = await PayableDataBase
+                .connection(this.TABLE_PAYABLE)
+                .select()
+                .where({ idCustomer: id })
+            if (queryResult[0]) {
+                const result = new Payable(
+                    queryResult[0].id,
+                    queryResult[0].status,
+                    queryResult[0].paymentDate,
+                    queryResult[0].createdDate,
+                    queryResult[0].value,
+                    queryResult[0].description,
+                    queryResult[0].idCustomer
+                )
+                return result
+            } else {
+                return null
+            }
+        } catch (error: any) {
+            throw new Error(error.message || error.sqlMessage)
+        }
+    }
 }
