@@ -21,11 +21,11 @@ export default class CardController {
         }
 
         try {
-            const token = await this.cardBusiness.createCard(input)
+            const result = await this.cardBusiness.createCard(input)
 
             res.status(200).send({
                 message: "Cartão criado com sucesso!",
-                token
+                result
             })
 
         } catch (error: any) {
