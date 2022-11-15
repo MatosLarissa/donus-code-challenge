@@ -1,11 +1,15 @@
 import express from "express";
+import CardController from "../controller/cardController/cardController";
 import CustomerController from "../controller/customerController/customerController";
 
 const customerController = new CustomerController()
+const cardController = new CardController()
 
-const customerRouter = express.Router();
+export const customerRouter = express.Router();
+export const cardRouter = express.Router();
 
 customerRouter.post("/signup", customerController.createCustomer)
 customerRouter.post("/login", customerController.login)
 
-export default customerRouter;
+cardRouter.post("/createCard", cardController.createCard)
+
