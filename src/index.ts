@@ -1,9 +1,12 @@
 
 import express from "express";
 import { AddressInfo } from "net";
+import customerRouter from "./routes/routes";
 
 const app = express();
 app.use(express.json());
+
+app.use("/user", customerRouter)
 
 const server = app.listen(process.env.PORT || 3003, () => {
    if (server) {
