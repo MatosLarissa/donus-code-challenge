@@ -1,6 +1,6 @@
 import Card from "../../../model/card/card"
 
-export interface CardRepository {
+export default interface CardRepository {
     createCard(card: Card): Promise<void>
     getAllTransactionByCustomerId(idCustomer: string): Promise<Card | null>
 }
