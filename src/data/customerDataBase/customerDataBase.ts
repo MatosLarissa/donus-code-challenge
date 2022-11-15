@@ -21,4 +21,16 @@ export default class CustomerDataBase extends BaseDataBase implements CustomerRe
             throw new Error(error.message || error.sqlMessage)
         }
     }
+
+    getCustomerByCpf = async (cpf: string) => {
+        try {
+            const result: Customer[] = await CustomerDataBase
+                .connection(this.TABLE_NAME)
+                .select()
+                .where({ cpf })
+            return result.length ? result[0] : null
+        } catch (error: any) {
+            throw new Error(error.message || error.sqlMessage)
+        }
+    }
 }
