@@ -1,4 +1,4 @@
-export class CypherCardNumberUtils {
+export default class CypherCardNumberUtils {
     cypherNumber(
         card: string
     ): string {

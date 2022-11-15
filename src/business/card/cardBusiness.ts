@@ -4,7 +4,7 @@ import HashManagerUtils from "../../utils/hashManagerUtils"
 import IdGeneratorUtils from "../../utils/idGeneratorUtils"
 import TokenGeneratorUtils from "../../utils/tokenGeneratorUtils"
 import TransactionInputDTO from "../../model/transaction/transactionDto/transactionInputDTO"
-import { CypherCardNumberUtils } from "../../utils/cypherCardNumberUtils"
+import CypherCardNumberUtils from "../../utils/cypherCardNumberUtils"
 
 export class CardBusiness {
 
