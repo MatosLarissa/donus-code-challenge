@@ -25,7 +25,7 @@ export default class PayableController {
             const token = await this.payableBusiness.createPayable(input)
 
             res.status(200).send({
-                message: "Compra realizada com sucesso!",
+                message: "Pagamento realizada com sucesso!",
                 token
             })
 
