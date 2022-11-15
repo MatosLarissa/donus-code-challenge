@@ -3,6 +3,6 @@ import Payable from "../../../model/playable/payable"
 
 export default interface PayableRepositoryInterface {
     createPayable(payable: Payable): Promise<void>
-    getHolderCard(id: string): Promise<Card| null>
-    getAllPayableByHolderId(id: string): Promise<Payable | null>
+    getCustomerCard(id: string): Promise<Card| null>
+    getAllPayableByCustomerId(id: string): Promise<Payable | null>
 }
