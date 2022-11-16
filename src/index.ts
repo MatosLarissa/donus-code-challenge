@@ -1,7 +1,7 @@
 
 import express from "express";
 import { AddressInfo } from "net";
-import { cardRouter, customerRouter } from "./routes/routes";
+import { cardRouter, customerRouter, payableRouter } from "./routes/routes";
 import cors from "cors";
 
 const app = express();
@@ -10,7 +10,7 @@ app.use(cors());
 
 app.use("/user", customerRouter)
 app.use("/user", cardRouter)
-
+app.use("/user", payableRouter)
 
 const server = app.listen(process.env.PORT || 3003, () => {
    if (server) {

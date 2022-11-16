@@ -1,5 +1,5 @@
 type TransactionInputDTO = {
-    token: string | undefined,
+    token?: string,
     cardCustomerName: string,
     cardNumber: string,
     cvv: string,

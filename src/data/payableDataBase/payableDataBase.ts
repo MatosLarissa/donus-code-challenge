@@ -17,7 +17,8 @@ export default class PayableDataBase extends BaseDataBase implements PayableRepo
                     "status": payable.getStatus(),
                     "paymentDate": payable.getPaymentDate(),
                     "createdDate": payable.getCreatedDate(),
-                    "value": payable.getValue(),
+                    "amount": payable.getValue(),
+                    "cardNumber": payable.getCardNumber(),
                     "description": payable.getDescription(),
                     "idCustomer": payable.getIdCustomer()
                 })
@@ -30,19 +31,17 @@ export default class PayableDataBase extends BaseDataBase implements PayableRepo
         try {
             const queryResult: any = await PayableDataBase
                 .connection(this.TABLE_PAYABLE)
-                .select()
-                .where({ idCustomer: id })
-            if (queryResult[0]) {
-                const result = new Payable(
-                    queryResult[0].id,
-                    queryResult[0].status,
-                    queryResult[0].paymentDate,
-                    queryResult[0].createdDate,
-                    queryResult[0].value,
-                    queryResult[0].description,
-                    queryResult[0].idCustomer
+                .select(
+                    "description",
+                    "amount",
+                    "status",
+                    "paymentDate",
+                    "cardNumber"
                 )
-                return result
+                .where({ id_holder: id })
+            if (queryResult.length > 0) {
+                return queryResult
+
             } else {
                 return null
             }

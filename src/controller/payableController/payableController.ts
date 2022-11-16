@@ -37,18 +37,9 @@ export default class PayableController {
 
     getAllPayableByUser = async (req: Request, res: Response) => {
         try {
-            const input: string | any = {
-                token: req.headers.authorization,
-                id: req.body.id
-            }
-            const token = await this.payableBusiness.getAllPayableByUser(input)
+            const input: string | any = req.headers.authorization
 
-            const result = [
-                token?.getDescription,
-                token?.getValue,
-                token?.getStatus,
-                token?.setPaymentDate,
-            ]
+            const result = await this.payableBusiness.getAllPayableByUser(input)
 
             res.status(200).send({
                 result

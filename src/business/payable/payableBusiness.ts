@@ -23,7 +23,7 @@ export default class PayableBusiness {
 
     createPayable = async (input: PayableInputDTO) => {
         const { token, paymentMethod, value, description, cardNumber, cvv } = input
-
+       
         if (!token) {
             throw new Error("Token inexistente ou inválido.")
         }
@@ -66,6 +66,9 @@ export default class PayableBusiness {
 
         const dateCreated = new Date()
 
+        const card = checkCardHolder!.getLastNumber()
+
+
         const payable = new Payable(
             id,
             status,
@@ -73,6 +76,7 @@ export default class PayableBusiness {
             dateCreated,
             updatedValue,
             description,
+            card,
             verifyToken.id
         )
 
@@ -81,18 +85,23 @@ export default class PayableBusiness {
         return payable
     }
 
-    getAllPayableByUser = async (token: string | undefined) => {
+    getAllPayableByUser = async (token: string) => {
         if (!token) {
             throw new Error("Token inexistente ou inválido.")
         }
-
         const verifyToken = this.tokenGeneratorUtils.getTokenData(token)
         if (!verifyToken) {
             throw new Error("Token inexistente ou inválido.")
         }
 
         const payable = await this.payableData.getAllPayableByCustomerId(verifyToken.id)
+        if (!payable) {
+            throw new Error("Nenhuma transação foi localizado")
+        }
+
 
         return payable
+
+
     }
 }

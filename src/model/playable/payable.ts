@@ -8,11 +8,12 @@ export default class Payable {
         private createdDate: Date,
         private value: number,
         private description: string,
+        private cardNumber: string,
         private idCustomer: string
 
     ) { }
     static toPayableModel(customer: any): Payable {
-        return new Payable(customer.id, customer.status, customer.paymentDate, customer.createdDate, customer.amount, customer.description, customer.idCustomer)
+        return new Payable(customer.id, customer.status, customer.paymentDate, customer.createdDate, customer.amount, customer.description, customer.cardNumber, customer.idCustomer)
     }
 
     getId() {
@@ -32,6 +33,9 @@ export default class Payable {
     }
     getDescription() {
         return this.description
+    }
+    getCardNumber() {
+        return this.cardNumber
     }
     getIdCustomer() {
         return this.idCustomer
@@ -54,6 +58,9 @@ export default class Payable {
     }
     setDescription(description: string) {
         this.description = description
+    }
+    setCardNumber(cardNumber: string) {
+        this.cardNumber = cardNumber
     }
     setIdCustomer(idCustomer: string) {
         this.idCustomer = idCustomer
