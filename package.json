@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/index.ts",
     "start": "tsc && tsnd ./src/index.ts",
+    "migration": "tsnd ./src/data/migrations/migrations.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
+    
   },
   "keywords": [],
   "author": "",
