@@ -36,7 +36,7 @@ export default class Customer {
     }
     setEmail(email: string) {
         this.email = email;
-    }    
+    }
     setPassword(password: string) {
         this.password = password;
     }

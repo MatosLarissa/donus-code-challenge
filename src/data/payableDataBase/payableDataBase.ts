@@ -3,7 +3,6 @@ import Card from "../../model/card/card"
 import Payable from "../../model/playable/payable"
 import BaseDataBase from "../baseDataBase/baseDataBase"
 
-
 export default class PayableDataBase extends BaseDataBase implements PayableRepositoryInterface {
     private TABLE_PAYABLE = "payable"
     private TABLE_CARD = "card"
@@ -18,8 +17,8 @@ export default class PayableDataBase extends BaseDataBase implements PayableRepo
                     "paymentDate": payable.getPaymentDate(),
                     "createdDate": payable.getCreatedDate(),
                     "amount": payable.getValue(),
-                    "cardNumber": payable.getCardNumber(),
                     "description": payable.getDescription(),
+                    "cardNumber": payable.getCardNumber(),
                     "idCustomer": payable.getIdCustomer()
                 })
         } catch (error: any) {
@@ -86,12 +85,27 @@ export default class PayableDataBase extends BaseDataBase implements PayableRepo
                     queryResult[0].cardNumber,
                     queryResult[0].lastNumber,
                     queryResult[0].cvv,
+                    queryResult[0].amount,
                     queryResult[0].idCustomer
                 )
                 return result
             } else {
                 return null
             }
+        } catch (error: any) {
+            throw new Error(error.message || error.sqlMessage)
+        }
+    }
+
+    updateAmountCard = async (idCustomer: string, amount: number) => {
+        try {
+            const queryResult = await PayableDataBase
+                .connection(this.TABLE_CARD)
+                .update({
+                    amount
+                })
+                .where({ idCustomer })
+            return Card.toCardModel([0])
         } catch (error: any) {
             throw new Error(error.message || error.sqlMessage)
         }

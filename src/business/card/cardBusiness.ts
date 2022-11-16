@@ -22,12 +22,14 @@ export class CardBusiness {
         this.cypherCardNumberUtils = new CypherCardNumberUtils()
 
     }
+    
     createCard = async (input: TransactionInputDTO) => {
 
         const {
             token,
             cardCustomerName,
             cardNumber,
+            amount,
             cvv
         } = input
 
@@ -40,9 +42,21 @@ export class CardBusiness {
             throw new Error("Algum campo não foi preenchido")
         }
 
-        const tokenData = this.tokenGeneratorUtils.getTokenData(token)
-        if (!tokenData) {
+        const verifyToken = this.tokenGeneratorUtils.getTokenData(token)
+        if (!verifyToken) {
             throw new Error("Token inválido")
+        }
+
+        const findAllCard = await this.cardData.getAllTransactionByCustomerId(verifyToken.id)
+        if (findAllCard) {
+            throw new Error("Este cliente ja possui um cartão.")
+        }
+
+        if (amount > 2000) {
+            throw new Error("Por questão de segurança cada transação de depósito não pode ser maior do que R$2.000")
+        }
+        if (amount < 0) {
+            throw new Error("Não é possível inserir um valor negativo")
         }
 
         const id = this.idGeneratorUtils.generateId()
@@ -56,10 +70,29 @@ export class CardBusiness {
             hashCard,
             cypherCard,
             hashCvv,
-            tokenData.id
+            amount,
+            verifyToken.id
         )
         await this.cardData.createCard(transaction)
 
         return transaction
+    }
+
+    getAllCardByCustomerId = async (token: string) => {
+        if (!token) {
+            throw new Error("Token inexistente ou inválido.")
+        }
+
+        const verifyToken = this.tokenGeneratorUtils.getTokenData(token)
+        if (!verifyToken) {
+            throw new Error("Token inexistente ou inválido.")
+        }
+
+        const findAllCard = await this.cardData.getAllCardByCustomerId(verifyToken.id)
+        if (!findAllCard) {
+            throw new Error("Nenhum cartão localizado")
+        }
+
+        return findAllCard
     }
 }

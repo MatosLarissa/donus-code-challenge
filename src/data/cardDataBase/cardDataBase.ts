@@ -2,7 +2,6 @@ import CardRepositoryInterface from "../../business/repositoryInterface/card/car
 import Card from "../../model/card/card"
 import BaseDataBase from "../baseDataBase/baseDataBase"
 
-
 export default class CardDataBase extends BaseDataBase implements CardRepositoryInterface {
 
     private TABLE_CARD = "card"
@@ -17,6 +16,7 @@ export default class CardDataBase extends BaseDataBase implements CardRepository
                     "cardNumber": card.getCardNumber(),
                     "lastNumber": card.getLastNumber(),
                     "cvv": card.getCvv(),
+                    "amount": card.getAmount(),
                     "idCustomer": card.getIdCustomer()
                 })
         } catch (error: any) {
@@ -37,9 +37,26 @@ export default class CardDataBase extends BaseDataBase implements CardRepository
                     queryResult[0].cardNumber,
                     queryResult[0].lastNumber,
                     queryResult[0].cvv,
+                    queryResult[0].amount,
                     queryResult[0].idCustomer
                 )
                 return result
+            } else {
+                return null
+            }
+        } catch (error: any) {
+            throw new Error(error.message || error.sqlMessage)
+        }
+    }
+
+    getAllCardByCustomerId = async (idCustomer: string) => {
+        try {
+            const queryResult: any = await CardDataBase
+                .connection(this.TABLE_CARD)
+                .select()
+                .where({ idCustomer })
+            if (queryResult.length > 0) {
+                return queryResult
             } else {
                 return null
             }

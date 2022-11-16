@@ -25,8 +25,8 @@ export default class CustomerController {
         try {
             const token = await this.customerBusiness.createCustomer(input)
             res.status(200).send({
-                message: "Cliente criado com sucesso!",
-                token
+                Message: "Cliente criado com sucesso!",
+                Token: token
             })
 
         } catch (error: any) {
@@ -44,7 +44,7 @@ export default class CustomerController {
         try {
             const token = await this.customerBusiness.login(input)
 
-            res.status(200).send({ Message: token })
+            res.status(200).send({ Token: token })
 
         } catch (error: any) {
             if (error.message) return res.status(400).send(error.message)

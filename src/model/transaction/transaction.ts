@@ -41,5 +41,3 @@ export default class Transaction {
         this.paymentMethod = paymentMethod
     }
 }
-
-

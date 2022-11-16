@@ -65,5 +65,4 @@ export default class Payable {
     setIdCustomer(idCustomer: string) {
         this.idCustomer = idCustomer
     }
-
 }

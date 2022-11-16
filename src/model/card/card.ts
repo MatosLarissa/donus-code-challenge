@@ -5,8 +5,13 @@ export default class Card {
         private cardNumber: string,
         private lastNumber: string,
         private cvv: string,
+        private amount: number,
         private idCustomer: string
     ) { }
+
+    static toCardModel(card: any): Card {
+        return new Card(card.id, card.cardCustomerName, card.cardNumber, card.lastNumber, card.cvv, card.amount, card.idCustomer);
+    }
 
     getId() {
         return this.id
@@ -22,6 +27,9 @@ export default class Card {
     }
     getCvv() {
         return this.cvv
+    }
+    getAmount() {
+        return this.amount
     }
     getIdCustomer() {
         return this.idCustomer
@@ -42,11 +50,10 @@ export default class Card {
     setCvv(cvv: string) {
         this.cvv = cvv
     }
+    setAmount(amount: number) {
+        this.amount = amount
+    }
     setIdCustomer(idCustomer: string) {
         this.idCustomer = idCustomer
     }
-
-
-
-
 }

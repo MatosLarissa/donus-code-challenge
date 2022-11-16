@@ -15,9 +15,10 @@ customerRouter.post("/signup", customerController.createCustomer)
 customerRouter.post("/login", customerController.login)
 
 cardRouter.post("/createCard", cardController.createCard)
+cardRouter.get("/card/all", cardController.getAllCardByCustomerId)
 
-payableRouter.post("/payable", payableController.createPayable)
-payableRouter.get("/allpayable", payableController.getAllPayableByUser)
+payableRouter.post("/depositPayable", payableController.depositPayable)
+payableRouter.post("/transferPayable", payableController.transferPayable)
+
+payableRouter.get("/allPayable", payableController.getAllPayableByUser)
 payableRouter.get("/payable/status", payableController.getPayableByStatus)
-
-

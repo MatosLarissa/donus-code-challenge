@@ -1,5 +1,4 @@
 import AuthenticatorInterface from "../../model/authenticator/authenticatorInterface";
-
 import Customer from "../../model/customer/customer";
 import signInInputDto from "../../model/customer/customerDto/signInInputDto";
 import signUpInputDto from "../../model/customer/customerDto/signUpInputDto";
@@ -9,10 +8,7 @@ import TokenGeneratorUtils from "../../utils/tokenGeneratorUtils";
 import ValidateCpfUtils from "../../utils/validateCpfUtils";
 import ValidateEmailUtils from "../../utils/validateEmailUtils";
 import ValidatePasswordUtils from "../../utils/validatePasswordUtils";
-
 import CustomerRepositoryInterface from "../repositoryInterface/customer/customerRepositoryInterface";
-
-ValidatePasswordUtils
 
 class CustomerBusiness {
 
@@ -35,6 +31,7 @@ class CustomerBusiness {
 
 
     }
+
     createCustomer = async (input: signInInputDto) => {
         const { fullName, cpf, email, password } = input
 
@@ -116,8 +113,7 @@ class CustomerBusiness {
         const token = this.tokenGeneratorUtils.generateToken({ id: customer.getId(), email: customer.getEmail() })
 
         return token
-
     }
 }
 
-export default CustomerBusiness;         
+export default CustomerBusiness;

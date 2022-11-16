@@ -23,5 +23,4 @@ export default class TokenGeneratorUtils {
         )
         return data as AuthenticatorInterface
     }
-
 }
