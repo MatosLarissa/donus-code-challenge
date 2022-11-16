@@ -5,4 +5,5 @@ export default interface PayableRepositoryInterface {
     createPayable(payable: Payable): Promise<void>
     getCustomerCard(id: string): Promise<Card| null>
     getAllPayableByCustomerId(id: string): Promise<Payable | null>
+    getPayableByStatus(id: string): Promise<Payable | null>
 }
