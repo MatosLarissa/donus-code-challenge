@@ -38,7 +38,7 @@ export default class PayableDataBase extends BaseDataBase implements PayableRepo
                     "paymentDate",
                     "cardNumber"
                 )
-                .where({ id_holder: id })
+                .where({ idCustomer: id })
             if (queryResult.length > 0) {
                 return queryResult
 
