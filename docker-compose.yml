@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: "donus-code-challenge-larissa-matos"
+    command: sh -c "npm run migration && npm run start"
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: run
+    ports:
+       - ${PORT}:${PORT}
+    restart: on-failure   
+    volumes:
+       - .:/usr/app 
+  db:
+    image: mysql:8.0
+    cap_add:
+       - SYS_NICE
+    environment:
+        MYSQL_DATABASE: ${DB_NAME}
+        MYSQL_USER: ${DB_USER}
+        MYSQL_PASSWORD: ${DB_PASSWORD}
+        MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+
+        HOST: ${HOST}
+        PORT: ${PORT}
+        NODE_ENV: ${NODE_ENV}
+        DB_HOST: ${DB_HOST}
+        ACCESS_TOKEN_EXPIRES_IN: ${ACCESS_TOKEN_EXPIRES_IN}
+        JWT_KEY: ${JWT_KEY}
+    ports:
+      - '3306:3306'  
+    volumes:
+      - db:/var/lib/mysq
+volumes:
+  db:
+    driver: local
