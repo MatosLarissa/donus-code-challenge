@@ -99,9 +99,30 @@ export default class PayableBusiness {
             throw new Error("Nenhuma transação foi localizado")
         }
 
-
         return payable
+    }
 
+    getPayableByStatus = async (input: PayableStatusInputDTO) => {
+        const { token, status } = input
 
+        if (!token) {
+            throw new Error("Token inexistente ou inválido.")
+        }
+
+        if (!status) {
+            throw new Error("Status inexistente ou inválido.")
+        }
+
+        const verifyToken = this.tokenGeneratorUtils.getTokenData(token)
+        if (!verifyToken) {
+            throw new Error("Token inexistente ou inválido.")
+        }
+
+        const payable = await this.payableData.getPayableByStatus(status)
+        if (!payable) {
+            throw new Error("Nenhuma transação foi localizado, verifique se o status esta correto.")
+        }
+        
+        return payable
     }
 }
