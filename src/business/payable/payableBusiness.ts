@@ -6,6 +6,7 @@ import PayableInputDTO from "../../model/playable/playableDto/payableInputDto";
 import paymentStatus from "../../model/enums/paymentStatus";
 import Payable from "../../model/playable/payable";
 import moment from "moment";
+import PayableStatusInputDto from "../../model/playable/playableDto/payableStatusInputDto";
 
 export default class PayableBusiness {
 
@@ -102,7 +103,7 @@ export default class PayableBusiness {
         return payable
     }
 
-    getPayableByStatus = async (input: PayableStatusInputDTO) => {
+    getPayableByStatus = async (input: PayableStatusInputDto) => {
         const { token, status } = input
 
         if (!token) {
@@ -122,7 +123,7 @@ export default class PayableBusiness {
         if (!payable) {
             throw new Error("Nenhuma transação foi localizado, verifique se o status esta correto.")
         }
-        
+
         return payable
     }
 }
