@@ -35,7 +35,7 @@
 
    ```
 
-* Run `npm run migrations` to add the tables to the database (if successful, the server will be ready to receive requests) 
+* Run `npm run migration` to add the tables to the database (if successful, the server will be ready to receive requests) 
 
 ## 🛠️ Technologies used:
 
