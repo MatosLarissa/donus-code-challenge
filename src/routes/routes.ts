@@ -18,4 +18,6 @@ cardRouter.post("/createCard", cardController.createCard)
 
 payableRouter.post("/payable", payableController.createPayable)
 payableRouter.get("/allpayable", payableController.getAllPayableByUser)
+payableRouter.get("/payable/status", payableController.getPayableByStatus)
+
 
