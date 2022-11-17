@@ -5,6 +5,7 @@ import IdGeneratorUtils from "../../utils/idGeneratorUtils"
 import TokenGeneratorUtils from "../../utils/tokenGeneratorUtils"
 import TransactionInputDTO from "../../model/transaction/transactionDto/transactionInputDTO"
 import CypherCardNumberUtils from "../../utils/cypherCardNumberUtils"
+import CardVerifyBodyRequest from "../../utils/validateInputs/cardVerifyBodyRequest"
 
 export class CardBusiness {
 
@@ -13,6 +14,7 @@ export class CardBusiness {
     private idGeneratorUtils: IdGeneratorUtils
     private tokenGeneratorUtils: TokenGeneratorUtils
     private cypherCardNumberUtils: CypherCardNumberUtils
+    private cardVerifyBodyRequest: CardVerifyBodyRequest
 
     constructor(cardDate: CardRepositoryInterface) {
         this.cardData = cardDate
@@ -20,44 +22,20 @@ export class CardBusiness {
         this.idGeneratorUtils = new IdGeneratorUtils()
         this.tokenGeneratorUtils = new TokenGeneratorUtils()
         this.cypherCardNumberUtils = new CypherCardNumberUtils()
-
+        this.cardVerifyBodyRequest = new CardVerifyBodyRequest()
     }
     
     createCard = async (input: TransactionInputDTO) => {
 
-        const {
-            token,
-            cardCustomerName,
-            cardNumber,
-            amount,
-            cvv
-        } = input
+        const { token, cardCustomerName, cardNumber, amount, cvv } = input
 
-        if (
-            !token ||
-            !cardCustomerName ||
-            !cardNumber ||
-            !cvv
-        ) {
-            throw new Error("Algum campo não foi preenchido")
-        }
-
-        const verifyToken = this.tokenGeneratorUtils.getTokenData(token)
+        this.cardVerifyBodyRequest.createCardVerifyBodyRequest(input)
+        
+        const verifyToken = this.tokenGeneratorUtils.getTokenData(token!)
         if (!verifyToken) {
             throw new Error("Token inválido")
         }
-
-        const findAllCard = await this.cardData.getAllTransactionByCustomerId(verifyToken.id)
-        if (findAllCard) {
-            throw new Error("Este cliente ja possui um cartão.")
-        }
-
-        if (amount > 2000) {
-            throw new Error("Por questão de segurança cada transação de depósito não pode ser maior do que R$2.000")
-        }
-        if (amount < 0) {
-            throw new Error("Não é possível inserir um valor negativo")
-        }
+        await this.cardVerifyBodyRequest.searchExistingCardRequest(verifyToken.id, this.cardData)
 
         const id = this.idGeneratorUtils.generateId()
         const cypherCard = await this.cypherCardNumberUtils.cypherNumber(cardNumber)

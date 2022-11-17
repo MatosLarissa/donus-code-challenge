@@ -1,14 +1,8 @@
-import AuthenticatorInterface from "../../model/authenticator/authenticatorInterface";
 import Customer from "../../model/customer/customer";
 import signInInputDto from "../../model/customer/customerDto/signInInputDto";
 import signUpInputDto from "../../model/customer/customerDto/signUpInputDto";
 import HashManagerUtils from "../../utils/hashManagerUtils";
-import IdGeneratorUtils from "../../utils/idGeneratorUtils";
-import TokenGeneratorUtils from "../../utils/tokenGeneratorUtils";
-import ValidateCpfUtils from "../../utils/validateCpfUtils";
-import ValidateEmailUtils from "../../utils/validateEmailUtils";
 import CustomerVerifyBodyRequest from "../../utils/validateInputs/customerVerifyBodyRequest";
-import ValidatePasswordUtils from "../../utils/validatePasswordUtils";
 import CustomerRepositoryInterface from "../repositoryInterface/customer/customerRepositoryInterface";
 
 class CustomerBusiness {
